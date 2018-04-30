@@ -3,8 +3,8 @@ var connection = require("../config/connection.js");
 
 var orm = {
   //get all burgers from db (read)
-  all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
+  all: function(burgers_db, cb) {
+    var queryString = "SELECT * FROM " + burgers_db + ";";
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -29,25 +29,7 @@ var orm = {
       cb(result);
     });
   },
-  // update one
-  update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE burgers SET ? WHERE ?";
-
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
-
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
-    });
-  },
-
+  
   // delete all
   delete: function(table, condition, cb) {
     var queryString = "DELETE FROM burgers";
