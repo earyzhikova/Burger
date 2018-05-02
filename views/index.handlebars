@@ -20,9 +20,9 @@
 			      	{{this.id}}
 			        {{this.burger_name}}
 
-			        <form action="/{{this.id}}?_method=PUT" method="POST">
-			          <input type="hidden" name="devoured" value="true">
-			          <button class="btn-primary"  type="submit">Devour It!</button>
+			        <form method="PUT">
+			          <input type="hidden" name="devoured" class='burger_id' value={{this.id}}>
+			          <button class="btn-primary newBurgerDevoured" type="submit">Devour It!</button>
 			        </form>
 
 			      </li>
@@ -35,12 +35,10 @@
 	    <div class="col-sm-6">
 
 			<h2>Burgers That Have Been Eaten!</h2>
-			
 			  {{#each burgers}}
 			    {{#if this.devoured}}
 			      <li>
-			      	{{this.id}}
-			        {{this.burger_name}}
+              <input type="text" class="form-control" placeholder="{{this.id}}.{{this.burger_name}}" readonly>
 
 			      </li>
 			    {{/if}}

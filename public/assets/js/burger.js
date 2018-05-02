@@ -1,4 +1,5 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
+
 $(function () {
   console.log("reached burger.js");
   $("#newBurgerButton").on("click", function (event) {
@@ -23,14 +24,35 @@ $(function () {
         location.reload();
       }
     );
-    // var id = $(this).data("id");
-    // var newBurger = $(this).data("newburger");
-
-
-
-
+  
   });
 
+  //clicked on a devour button
+  $(".newBurgerDevoured").on("click", function (event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    //Get input text
+    var burger_id = $(this).parent().children(".burger_id").val();
+    console.log(burger_id);
+
+    //package input text to send
+    var newBurgerDevoured = {
+     devoured: burger_id
+    };
+
+    //  Send the PUT request.
+    $.ajax("/api/devour/:" + burger_id +"/"  , {
+      type: "PUT",
+      data: newBurgerDevoured
+    }).then(
+      function () {
+        console.log("Burger" + burger_id + 'was devouered');
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  
+  });
   //   // $(".create-form").on("submit", function(event) {
   //   //   // Make sure to preventDefault on a submit event.
   //   //   event.preventDefault();
@@ -40,31 +62,15 @@ $(function () {
   //   //     sleepy: $("[name=sleepy]:checked").val().trim()
   //   //   };
 
-  //   //   // Send the POST request.
-  //   //   $.ajax("/api/cats", {
-  //   //     type: "POST",
-  //   //     data: newCat
-  //   //   }).then(
-  //   //     function() {
-  //   //       console.log("created new cat");
-  //   //       // Reload the page to get the updated list
-  //   //       location.reload();
-  //   //     }
-  //   //   );
-  //   // });
-
-  //   // $(".delete-cat").on("click", function(event) {
-  //   //   var id = $(this).data("id");
-
-  //   //   // Send the DELETE request.
-  //   //   $.ajax("/api/cats/" + id, {
-  //   //     type: "DELETE"
-  //   //   }).then(
-  //   //     function() {
-  //   //       console.log("deleted cat", id);
-  //   //       // Reload the page to get the updated list
-  //   //       location.reload();
-  //   //     }
-  //   //   );
-  // });
-});
+      // Send the POST request.
+    //   $.ajax("/api/burgers", {
+    //     type: "POST",
+    //     data: newBurgerState
+    //   }).then(
+    //     function() {
+    //       console.log("created new burger");
+    //       // Reload the page to get the updated list
+    //       location.reload();
+    //     }
+    //   );
+    });

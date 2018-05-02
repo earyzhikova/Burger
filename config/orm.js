@@ -1,6 +1,5 @@
 // import connection.js
 var connection = require("../config/connection.js");
-
 function printQuestionMarks(num) {
   var arr = [];
 
@@ -9,13 +8,22 @@ function printQuestionMarks(num) {
   }
 
   return arr.toString();
-  
+}
+
+function objToSql(ob) {
+  // column1=value, column2=value2,...
+  var arr = [];
+
+  for (var key in ob) {
+    arr.push(key + "=" + ob[key]);
+  }
+
+  return arr.toString();
 }
 
 var orm = {
-  //get all burgers from db (read)
-  all: function(burgers_db, cb) {
-    var queryString = "SELECT * FROM " + burgers_db + ";";
+  all: function(tableInput, cb) {
+    var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -23,8 +31,8 @@ var orm = {
       cb(result);
     });
   },
-
-  // update new burger(create)
+  // vals is an array of values that we want to save to cols
+  // cols are the columns we want to insert the values into
   create: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
@@ -41,12 +49,30 @@ var orm = {
       if (err) {
         throw err;
       }
-
       cb(result);
     });
   },
+  // objColVals would be the columns and values that you want to update
+  // an example of objColVals would be {name: panther, sleepy: true}
+  update: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
 
+    queryString += " SET ";
+    queryString += objToSql(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  }
 };
+
+
 
 // Export the orm object 
 module.exports = orm;
