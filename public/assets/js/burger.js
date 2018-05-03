@@ -32,7 +32,8 @@ $(function () {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
     //Get input text
-    var burger_id = $(this).parent().children(".burger_id").val();
+    // var burger_id = $(this).parent().children(".burger_id").val();
+    var burger_id = $(this).attr("data-burgerId");
     console.log(burger_id);
 
     //package input text to send
@@ -41,12 +42,12 @@ $(function () {
     };
 
     //  Send the PUT request.
-    $.ajax("/api/devour/:" + burger_id +"/"  , {
+    $.ajax("/api/burgers/" + burger_id +"/"  , {
       type: "PUT",
       data: newBurgerDevoured
     }).then(
       function () {
-        console.log("Burger" + burger_id + 'was devouered');
+        console.log("Burger" + burger_id + 'was devoured');
         // Reload the page to get the updated list
         location.reload();
       }

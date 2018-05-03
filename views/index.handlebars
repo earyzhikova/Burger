@@ -3,7 +3,10 @@
 <div class = "row">
   <div class="center col-sm-6">
     <img src="./assets/css/img/burger-image.png" alt="burger">
-<h1>Eat-Da-Burger!!!</h1>
+    </div>
+    <div class="col-sm-6" id="eatDaBurger"><h2>Eat-Da-Burger!!!</h2>
+    </div>
+
 </div>
 </div>
 
@@ -11,7 +14,7 @@
 	    <div class="col-sm-6">
 
 			<br>
-			<h2>Burgers Available To Eat!</h2>
+			<h3>Burgers Available To Eat!</h3>
 
 			<ul>
 			  {{#each burgers}}
@@ -20,10 +23,10 @@
 			      	{{this.id}}
 			        {{this.burger_name}}
 
-			        <form method="PUT">
-			          <input type="hidden" name="devoured" class='burger_id' value={{this.id}}>
-			          <button class="btn-primary newBurgerDevoured" type="submit">Devour It!</button>
-			        </form>
+			        {{!-- <form method="PUT"> --}}
+			          {{!-- <input type="hidden" name="devoured" class='burger_id' value={{this.id}}> --}}
+			          <button class="btn-primary newBurgerDevoured" data-burgerId="{{this.id}}" type="submit">Devour It!</button>
+			        {{!-- </form> --}}
 
 			      </li>
 			    {{/unless}}
@@ -34,13 +37,13 @@
 
 	    <div class="col-sm-6">
 
-			<h2>Burgers That Have Been Eaten!</h2>
+			<h3>Burgers That Have Been Eaten!</h3>
 			  {{#each burgers}}
 			    {{#if this.devoured}}
-			      <li>
-              <input type="text" class="form-control" placeholder="{{this.id}}.{{this.burger_name}}" readonly>
+			      
+              <input type="text" class="form-control" placeholder="{{this.id}}.{{this.burger_name}}">
 
-			      </li>
+			    
 			    {{/if}}
 			  {{/each}}
 			
@@ -52,7 +55,7 @@
 	<div class="row">
 	    <div class="center col-sm-12">
 
-			<h2>Add A Burger!</h2>
+			<h3>Add A Burger!</h3>
 
 <form id="form-add">
   <div class="form-group">  
