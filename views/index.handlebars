@@ -41,7 +41,11 @@
 			  {{#each burgers}}
 			    {{#if this.devoured}}
 			      
-              <input type="text" class="form-control" placeholder="{{this.id}}.{{this.burger_name}}">
+              {{!-- <input type="text" class="form-control" placeholder=" --}}
+              {{this.id}}
+              {{this.burger_name}}
+              <br>
+              {{!-- "> --}}
 
 			    
 			    {{/if}}
@@ -53,10 +57,10 @@
 	
 
 	<div class="row">
-	    <div class="center col-sm-12">
+	    <div class="col-centered col-sm-12" id="addBurgerStyle">
 
 			<h3>Add A Burger!</h3>
-
+<br>
 <form id="form-add">
   <div class="form-group">  
       <input id="addBurger" type="text" class="form-control" data = ""
