@@ -1,26 +1,26 @@
 
 <div class = "container">
 <div class = "row">
-  <div class="center col-sm-6">
+  <div class="mx-auto"> 
     <img src="./assets/css/img/burger-image.png" alt="burger">
-    </div>
-    <div class="col-sm-6" id="eatDaBurger"><h2>Eat-Da-Burger!!!</h2>
-    </div>
+    <h2>Eat-Da-Burger!!!</h2>
+  </div>
+
 
 </div>
 </div>
 
 <div class="row">
-	    <div class="col-sm-6">
+      <div class="col-sm-3 mx-auto" align="center">
+        </div>
+	    <div class="col-sm-3 mx-auto">
 
-			<br>
 			<h3>Burgers Available To Eat!</h3>
 
-			<ul>
 			  {{#each burgers}}
 			    {{#unless this.devoured}}
-			      <li>
-			      	{{this.id}}
+			      
+			      	{{math @index "+" 1}}
 			        {{this.burger_name}}
 
 			        {{!-- <form method="PUT"> --}}
@@ -28,10 +28,9 @@
 			          <button class="btn-primary newBurgerDevoured" data-burgerId="{{this.id}}" type="submit">Devour It!</button>
 			        {{!-- </form> --}}
 
-			      </li>
+			      <br>
 			    {{/unless}}
 			  {{/each}}
-			</ul>
 
 	    </div>
 
@@ -42,7 +41,7 @@
 			    {{#if this.devoured}}
 			      
               {{!-- <input type="text" class="form-control" placeholder=" --}}
-              {{this.id}}
+              {{math @index "+" 1}}
               {{this.burger_name}}
               <br>
               {{!-- "> --}}
@@ -57,14 +56,15 @@
 	
 
 	<div class="row">
-	    <div class="col-centered col-sm-12" id="addBurgerStyle">
+	    <div class="mx-auto col-sm-6" align="center" id="addBurgerStyle">
 
 			<h3>Add A Burger!</h3>
-<br>
+
 <form id="form-add">
   <div class="form-group">  
       <input id="addBurger" type="text" class="form-control" data = ""
     placeholder="ex. Cheeseburger">
+    <br>
     <button id="newBurgerButton" type="submit" class="btn">Submit</button>
   </div>
 </form>
