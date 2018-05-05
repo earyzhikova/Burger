@@ -54,6 +54,15 @@ $(function () {
     );
   
   });
+
+  var Handlebars = require('handlebars');
+
+Handlebars.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});
+
+{{inc @index}}
   //   // $(".create-form").on("submit", function(event) {
   //   //   // Make sure to preventDefault on a submit event.
   //   //   event.preventDefault();
